@@ -68,6 +68,11 @@ int main() {
         glEnableVertexAttribArray(color);
         glVertexAttribPointer(color, 3, GL_FLOAT, false, sizeof(float) * 3, colors);
 
+        auto time = (float) glfwGetTime();
+
+        int time_index = glGetUniformLocation(program, "u_time");
+        glUniform1f(time_index, time);
+
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
         /*=================*/
