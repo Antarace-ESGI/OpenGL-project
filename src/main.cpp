@@ -42,8 +42,6 @@ int main() {
 
         game.render();
 
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-
         /*=================*/
 
         /* Swap front and back buffers */

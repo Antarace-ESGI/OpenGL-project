@@ -1,18 +1,15 @@
 #include "Game.h"
+#include "DragonData.h"
 
 void Game::render() {
     auto program = this->shader->getProgram();
     glUseProgram(program);
 
-    static const float triangle[] = {
-            0.0, 0.5f,
-            -0.5f, -0.5f,
-            0.5f, -0.5f,
-    };
+    auto* mesh = reinterpret_cast<Vertex *>(DragonVertices);
 
     int location = glGetAttribLocation(program, "a_position");
     glEnableVertexAttribArray(location);
-    glVertexAttribPointer(location, 2, GL_FLOAT, false, sizeof(float) * 2, triangle);
+    glVertexAttribPointer(location, 2, GL_FLOAT, false, sizeof(float) * 2, mesh->position);
 
     static const float colors[] = {
             0.0, 0.0, 1.0,
@@ -22,7 +19,7 @@ void Game::render() {
 
     int color = glGetAttribLocation(program, "a_color");
     glEnableVertexAttribArray(color);
-    glVertexAttribPointer(color, 3, GL_FLOAT, false, sizeof(float) * 3, colors);
+    glVertexAttribPointer(color, 3, GL_FLOAT, false, sizeof(float) * 3, mesh->normal);
 
     auto time = (float) glfwGetTime();
 
@@ -49,4 +46,8 @@ void Game::render() {
 
     const auto projection_index = glGetUniformLocation(program, "u_projection");
     glUniformMatrix4fv(projection_index, 1, GL_FALSE, projection_matrix);
+
+    const size_t dragon_byte_size = sizeof(DragonVertices);
+    const size_t vertex_count = dragon_byte_size / sizeof(Vertex);
+    glDrawArrays(GL_TRIANGLES, 0, vertex_count);
 }

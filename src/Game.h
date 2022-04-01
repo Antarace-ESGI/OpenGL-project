@@ -3,6 +3,12 @@
 
 #include "main.h"
 
+struct Vertex {
+    float position[3];
+    float normal[3];
+    float uv[3];
+};
+
 class Game {
 public:
     GLShader* shader;
@@ -15,6 +21,5 @@ public:
     const float FOV_Y = 45 * M_PI / 180;
     const float FOCAL_DISTANCE = 1 / tanf(FOV_Y / 2);
 };
-
 
 #endif //INC_2022_03_30_GAME_H
