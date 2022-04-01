@@ -13,6 +13,7 @@
 #define HEIGHT 1080.0f
 
 #include "common/GLShader.h"
+#include "loader.h"
 #include "Game.h"
 
 #endif //INC_2022_03_30_MAIN_H

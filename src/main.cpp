@@ -1,11 +1,6 @@
 #include "main.h"
 
-void initialize(GLShader *shader) {
-    shader->loadVertexShader("shaders/triangle.vs");
-    shader->loadFragmentShader("shaders/triangle.fs");
-    shader->create();
-}
-
+// Initialize
 int main() {
     GLFWwindow *window;
 

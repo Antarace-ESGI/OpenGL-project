@@ -2,18 +2,19 @@
 #define INC_2022_03_30_GAME_H
 
 #include "main.h"
-
-struct Vertex {
-    float position[3];
-    float normal[3];
-    float uv[2];
-};
+#include "Vertex.h"
 
 class Game {
 public:
     GLShader* shader;
 
-    void render();
+    Game(void) {
+        this->vertices = loadModel();
+    };
+
+    void render(void);
+
+    float* vertices;
 
     const float ASPECT_RATIO = WIDTH / HEIGHT;
     const float Z_NEAR = 0.1f;

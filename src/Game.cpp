@@ -1,11 +1,12 @@
 #include "Game.h"
 #include "DragonData.h"
 
+// Render loop
 void Game::render() {
     auto program = this->shader->getProgram();
     glUseProgram(program);
 
-    auto* mesh = reinterpret_cast<Vertex *>(DragonVertices);
+    auto* mesh = reinterpret_cast<Vertex *>(this->vertices);
 
     const int stride = sizeof(Vertex);
 
@@ -27,7 +28,7 @@ void Game::render() {
             cosf(time), 0, sinf(time), 0, // 1st column
             0, 1, 0,0, // 2nd column
             -sinf(time), 0, cosf(time), 0,
-            0, 0, -30 /* Move triangle back */, 1
+            0, 0, -20 /* Move triangle back */, 1
     };
 
     const auto rotation_index = glGetUniformLocation(program, "u_rotation");

@@ -7,7 +7,9 @@ add_executable(2022_03_30
         src/main.cpp src/main.h
         src/common/GLShader.cpp src/common/GLShader.h
         src/Game.cpp src/Game.h
-        src/DragonData.h)
+        src/DragonData.h
+        src/libs/tiny_obj_loader.cc src/libs/tiny_obj_loader.h
+        src/loader.cpp src/loader.h src/Vertex.h)
 
 # Libraries
 
@@ -29,3 +31,4 @@ target_link_libraries(2022_03_30 glfw)
 
 # Copy
 file(COPY shaders DESTINATION .)
+file(COPY resources DESTINATION .)
