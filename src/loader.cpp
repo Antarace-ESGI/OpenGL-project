@@ -6,17 +6,19 @@ void initialize(GLShader *shader) {
     shader->create();
 }
 
-float *loadModel() {
+float *loadModel(size_t &vertex_count) {
     std::string objfile = "resources/bete.obj";
     tinyobj::ObjReaderConfig config;
     tinyobj::ObjReader obj;
+
+    config.triangulate = true;
 
     if (!obj.ParseFromFile(objfile, config)) {
         exit(1);
     }
 
-    size_t vertex_count = 0;
-    std::cout << "Counting vertices" << std::endl;
+    vertex_count = 0;
+
 
     for (const auto &shape: obj.GetShapes()) {
         // Loop over faces(polygon)
@@ -26,9 +28,9 @@ float *loadModel() {
         }
     }
 
-    auto *vertices = new float[vertex_count * 3]();
+    auto *vertices = new float[vertex_count * 8]();
 
-    std::cout << "Loading vertices" << std::endl;
+
     unsigned int i = 0;
 
     for (size_t shape = 0; shape < obj.GetShapes().size(); shape++) {
@@ -39,9 +41,9 @@ float *loadModel() {
             auto fv = size_t(obj.GetShapes()[shape].mesh.num_face_vertices[face]);
 
             // Loop over vertices in the face.
-            for (size_t vertice = 0; vertice < fv; vertice++) {
+            for (size_t face_vertices = 0; face_vertices < fv; face_vertices++) {
                 // access to vertex
-                tinyobj::index_t idx = obj.GetShapes()[shape].mesh.indices[index_offset + vertice];
+                tinyobj::index_t idx = obj.GetShapes()[shape].mesh.indices[index_offset + face_vertices];
                 tinyobj::real_t vx = obj.GetAttrib().vertices[3 * size_t(idx.vertex_index) + 0];
                 tinyobj::real_t vy = obj.GetAttrib().vertices[3 * size_t(idx.vertex_index) + 1];
                 tinyobj::real_t vz = obj.GetAttrib().vertices[3 * size_t(idx.vertex_index) + 2];
@@ -49,9 +51,10 @@ float *loadModel() {
                 vertices[i++] = vx;
                 vertices[i++] = vy;
                 vertices[i++] = vz;
+                i+=5;
             }
-            index_offset += fv;
 
+            index_offset += fv;
         }
     }
 

@@ -15,6 +15,6 @@
 
 void initialize(GLShader *shader);
 
-float *loadModel();
+float *loadModel(size_t &vertex_count);
 
 #endif //INC_2022_03_30_LOADER_H

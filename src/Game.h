@@ -9,11 +9,12 @@ public:
     GLShader* shader;
 
     Game(void) {
-        this->vertices = loadModel();
+        this->vertices = loadModel(this->vertex_count);
     };
 
     void render(void);
 
+    size_t vertex_count = 0;
     float* vertices;
 
     const float ASPECT_RATIO = WIDTH / HEIGHT;
