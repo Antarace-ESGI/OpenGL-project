@@ -1,12 +1,10 @@
 #include "Game.h"
-#include "DragonData.h"
 
 // Render loop
-void Game::render() {
+void Game::render(GLuint textureId) {
     auto program = this->shader->getProgram();
     glUseProgram(program);
-
-    auto* mesh = reinterpret_cast<Vertex *>(this->vertices);
+    auto *mesh = reinterpret_cast<Vertex *>(this->vertices);
 
     const int stride = sizeof(Vertex);
 
@@ -14,9 +12,12 @@ void Game::render() {
     glEnableVertexAttribArray(location);
     glVertexAttribPointer(location, 3, GL_FLOAT, false, stride, mesh->position);
 
-    int color = glGetAttribLocation(program, "a_color");
-    glEnableVertexAttribArray(color);
-    glVertexAttribPointer(color, 3, GL_FLOAT, false, stride, mesh->normal);
+    int texLocation = glGetAttribLocation(program, "a_texcoords");
+    glVertexAttribPointer(texLocation, 2, GL_FLOAT, false, stride, mesh->uv);
+    glEnableVertexAttribArray(texLocation);
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, textureId);
 
     auto time = (float) glfwGetTime();
 
@@ -26,7 +27,7 @@ void Game::render() {
     // Matrices in OpenGL are defined in columns
     float rotation_matrix[16] = {
             cosf(time), 0, sinf(time), 0, // 1st column
-            0, 1, 0,0, // 2nd column
+            0, 1, 0, 0, // 2nd column
             -sinf(time), 0, cosf(time), 0,
             0, 0, -10 /* Move triangle back */, 1
     };
@@ -44,5 +45,8 @@ void Game::render() {
     const auto projection_index = glGetUniformLocation(program, "u_projection");
     glUniformMatrix4fv(projection_index, 1, GL_FALSE, projection_matrix);
 
-    glDrawArrays(GL_TRIANGLES, 0, (int)this->vertex_count);
+    glDrawArrays(GL_TRIANGLES, 0, (int) this->vertex_count);
+
+    int uvLocation = glGetUniformLocation(program, "u_sampler");
+    glUniform1i(uvLocation, 0); // Canal de la texture, correspond à GL_TEXTURE0
 }

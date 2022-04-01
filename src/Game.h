@@ -3,10 +3,11 @@
 
 #include "main.h"
 #include "Vertex.h"
+#include "libs/stb/stb_image.h"
 
 class Game {
 public:
-    GLShader* shader;
+    GLShader *shader;
 
     Game(void) {
         this->vertices = loadModel(this->vertex_count);
@@ -16,10 +17,10 @@ public:
         delete this->vertices; // Free vertices
     };
 
-    void render(void);
+    void render(GLuint textureId);
 
     size_t vertex_count = 0;
-    float* vertices;
+    float *vertices;
 
     const float ASPECT_RATIO = WIDTH / HEIGHT;
     const float Z_NEAR = 0.1f;

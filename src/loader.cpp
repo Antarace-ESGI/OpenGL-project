@@ -7,7 +7,7 @@ void initialize(GLShader *shader) {
 }
 
 float *loadModel(size_t &vertex_count) {
-    std::string objfile = "resources/bete.obj";
+    std::string objfile = "resources/cube.obj";
     tinyobj::ObjReaderConfig config;
     tinyobj::ObjReader obj;
 
@@ -18,7 +18,6 @@ float *loadModel(size_t &vertex_count) {
     }
 
     vertex_count = 0;
-
 
     for (const auto &shape: obj.GetShapes()) {
         // Loop over faces(polygon)
@@ -53,17 +52,16 @@ float *loadModel(size_t &vertex_count) {
 
                 // 3 normals
                 vertices[i++] = 0;
-                vertices[i++] = 1;
-                vertices[i++] = 1;
+                vertices[i++] = 0;
+                vertices[i++] = 0;
 
-                if(idx.texcoord_index && idx.texcoord_index >= 0){
+                if (idx.texcoord_index && idx.texcoord_index >= 0) {
                     tinyobj::real_t tx = obj.GetAttrib().texcoords[2 * size_t(idx.vertex_index) + 0];
                     tinyobj::real_t ty = obj.GetAttrib().texcoords[2 * size_t(idx.vertex_index) + 1];
 
                     // 2 uv
                     vertices[i++] = tx;
                     vertices[i++] = ty;
-
                 } else {
                     i += 2;
                 }
