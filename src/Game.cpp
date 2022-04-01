@@ -24,10 +24,10 @@ void Game::render() {
 
     // Matrices in OpenGL are defined in columns
     float rotation_matrix[16] = {
-            cosf(time), sinf(time), 0, 0, // 1st column
-            -sinf(time), cosf(time), 0, 0, // 2nd column
-            0, 0, 1 ,0,
-            0, 0, -20 /* Move triangle back */, 1
+            cosf(time), 0, sinf(time), 0, // 1st column
+            0, 1, 0,0, // 2nd column
+            -sinf(time), 0, cosf(time), 0,
+            0, 0, -30 /* Move triangle back */, 1
     };
 
     const auto rotation_index = glGetUniformLocation(program, "u_rotation");

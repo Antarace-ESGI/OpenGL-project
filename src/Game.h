@@ -17,9 +17,9 @@ public:
 
     const float ASPECT_RATIO = WIDTH / HEIGHT;
     const float Z_NEAR = 0.1f;
-    const float Z_FAR = 100;
-    const float FOV_Y = 45 * M_PI / 180;
-    const float FOCAL_DISTANCE = 1 / tanf(FOV_Y / 2);
+    const float Z_FAR = 100.f;
+    const float FOV_Y = 45.f * M_PI / 180.f;
+    const float FOCAL_DISTANCE = 1.f / tanf(FOV_Y / 2.f);
 };
 
 #endif //INC_2022_03_30_GAME_H

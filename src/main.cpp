@@ -33,16 +33,15 @@ int main() {
 
     initialize(game.shader);
 
+    glEnable(GL_CULL_FACE);
+    glEnable(GL_DEPTH_TEST);
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
         /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        /*=================*/
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         game.render();
-
-        /*=================*/
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
