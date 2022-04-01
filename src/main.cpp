@@ -9,12 +9,12 @@ void initialize(GLShader *shader) {
 int main() {
     GLFWwindow *window;
 
-    GLShader *g_triangleShader;
-
     /* Initialize the library */
     if (!glfwInit()) {
         return -1;
     }
+
+    Game game;
 
     /* create a windowed mode window and its OpenGL context */
     window = glfwCreateWindow(WIDTH, HEIGHT, "Hello World", nullptr, nullptr);
@@ -27,12 +27,11 @@ int main() {
     glfwMakeContextCurrent(window);
 
     GLenum error = glewInit();
-
     if (error != GL_NO_ERROR) {
         std::cout << error << std::flush;
     }
 
-    initialize(g_triangleShader);
+    initialize(game.shader);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
@@ -41,37 +40,7 @@ int main() {
 
         /*=================*/
 
-        auto program = g_triangleShader->getProgram();
-        glUseProgram(program);
-
-        static const float triangle[] = {
-                0.0, 0.5f,
-                -0.5f, -0.5f,
-                0.5f, -0.5f,
-        };
-
-        const size_t stride = 2 * sizeof(float);
-        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, stride, triangle);
-        glEnableVertexAttribArray(0);
-
-        int location = glGetAttribLocation(program, "a_position");
-        glEnableVertexAttribArray(location);
-        glVertexAttribPointer(location, 2, GL_FLOAT, false, sizeof(float) * 2, triangle);
-
-        static const float colors[] = {
-                0.0, 0.0, 1.0,
-                0.0, 1.0, 0.0,
-                1.0, 0.0, 0.0,
-        };
-
-        int color = glGetAttribLocation(program, "a_color");
-        glEnableVertexAttribArray(color);
-        glVertexAttribPointer(color, 3, GL_FLOAT, false, sizeof(float) * 3, colors);
-
-        auto time = (float) glfwGetTime();
-
-        int time_index = glGetUniformLocation(program, "u_time");
-        glUniform1f(time_index, time);
+        game.render();
 
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
@@ -84,7 +53,7 @@ int main() {
         glfwPollEvents();
     }
 
-    g_triangleShader->destroy();
+    game.shader->destroy();
 
     glfwTerminate();
     return 0;

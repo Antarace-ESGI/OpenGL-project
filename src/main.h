@@ -9,9 +9,10 @@
 #include "GL/glu.h"
 #include "GLFW/glfw3.h"
 
-#include "common/GLShader.h"
+#define WIDTH 800.0f
+#define HEIGHT 600.0f
 
-#define WIDTH 800
-#define HEIGHT 600
+#include "common/GLShader.h"
+#include "Game.h"
 
 #endif //INC_2022_03_30_MAIN_H
