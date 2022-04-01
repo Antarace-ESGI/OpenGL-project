@@ -9,8 +9,8 @@
 #include "GL/glu.h"
 #include "GLFW/glfw3.h"
 
-#define WIDTH 800.0f
-#define HEIGHT 600.0f
+#define WIDTH 1920.0f
+#define HEIGHT 1080.0f
 
 #include "common/GLShader.h"
 #include "Game.h"
