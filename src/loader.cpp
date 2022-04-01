@@ -7,8 +7,10 @@ void initialize(GLShader *shader) {
 }
 
 float *loadModel(size_t &vertex_count) {
-    std::string objfile = "resources/cube.obj";
+    std::string objfile = "resources/Skull.obj";
     tinyobj::ObjReaderConfig config;
+    config.mtl_search_path = "resources/Skull.mtl";
+    config.triangulate = true;
     tinyobj::ObjReader obj;
 
     config.triangulate = true;
@@ -55,7 +57,7 @@ float *loadModel(size_t &vertex_count) {
                 vertices[i++] = 0;
                 vertices[i++] = 0;
 
-                if (idx.texcoord_index && idx.texcoord_index >= 0) {
+                if (idx.texcoord_index >= 0) {
                     tinyobj::real_t tx = obj.GetAttrib().texcoords[2 * size_t(idx.vertex_index) + 0];
                     tinyobj::real_t ty = obj.GetAttrib().texcoords[2 * size_t(idx.vertex_index) + 1];
 
@@ -68,7 +70,9 @@ float *loadModel(size_t &vertex_count) {
             }
 
             index_offset += fv;
+
         }
+
     }
 
     std::cout << "Model loaded" << std::endl;

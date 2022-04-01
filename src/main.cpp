@@ -30,16 +30,11 @@ int main() {
 
     initialize(game.shader);
 
-    int width, height, comp; // Ce sont des paramètres out
-    uint8_t *data = stbi_load("resources/planks_jungle.png", &width, &height, &comp, STBI_rgb);
-
     GLuint textureId;
 
     glGenTextures(1, &textureId);
-
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureId);
-
 
     // Utiliser pour le redimensionnement
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -47,13 +42,15 @@ int main() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
+    int width, height, comp; // Ce sont des paramètres out
+    uint8_t *data = stbi_load("resources/Skull.jpg", &width, &height, &comp, STBI_rgb);
+
     if (!data) {
         exit(1);
     } else {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
         stbi_image_free(data);
     }
-
 
     glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
