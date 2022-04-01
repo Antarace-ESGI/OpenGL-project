@@ -12,6 +12,10 @@ public:
         this->vertices = loadModel(this->vertex_count);
     };
 
+    ~Game(void) {
+        delete this->vertices; // Free vertices
+    };
+
     void render(void);
 
     size_t vertex_count = 0;

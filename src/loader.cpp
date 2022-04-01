@@ -29,8 +29,6 @@ float *loadModel(size_t &vertex_count) {
     }
 
     auto *vertices = new float[vertex_count * 8]();
-
-
     unsigned int i = 0;
 
     for (size_t shape = 0; shape < obj.GetShapes().size(); shape++) {
@@ -48,10 +46,27 @@ float *loadModel(size_t &vertex_count) {
                 tinyobj::real_t vy = obj.GetAttrib().vertices[3 * size_t(idx.vertex_index) + 1];
                 tinyobj::real_t vz = obj.GetAttrib().vertices[3 * size_t(idx.vertex_index) + 2];
 
+                // 3 positions
                 vertices[i++] = vx;
                 vertices[i++] = vy;
                 vertices[i++] = vz;
-                i+=5;
+
+                // 3 normals
+                vertices[i++] = 0;
+                vertices[i++] = 1;
+                vertices[i++] = 1;
+
+                if(idx.texcoord_index && idx.texcoord_index >= 0){
+                    tinyobj::real_t tx = obj.GetAttrib().texcoords[2 * size_t(idx.vertex_index) + 0];
+                    tinyobj::real_t ty = obj.GetAttrib().texcoords[2 * size_t(idx.vertex_index) + 1];
+
+                    // 2 uv
+                    vertices[i++] = tx;
+                    vertices[i++] = ty;
+
+                } else {
+                    i += 2;
+                }
             }
 
             index_offset += fv;
