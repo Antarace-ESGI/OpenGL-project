@@ -9,7 +9,7 @@ add_executable(2022_03_30
         src/Game.cpp src/Game.h
         src/DragonData.h
         src/libs/tiny_obj_loader.cc src/libs/tiny_obj_loader.h
-        src/loader.cpp src/loader.h src/Vertex.h)
+        src/loader.cpp src/loader.h src/Vertex.h src/Quaternion.cpp src/Quaternion.h)
 
 # Libraries
 
