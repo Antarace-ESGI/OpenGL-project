@@ -25,12 +25,8 @@ void Game::render(GLuint textureId) {
     glUniform1f(time_index, time);
 
     // Matrices in OpenGL are defined in columns
-    float rotation_matrix[16] = {
-            cosf(time), 0, sinf(time), 0, // 1st column
-            0, 1, 0, 0, // 2nd column
-            -sinf(time), 0, cosf(time), 0,
-            0, -15, -75 /* Move triangle back */, 1
-    };
+    (*rotation) += Quaternion{0, 0, 0, 0};
+    float *rotation_matrix = rotation->to_rotation_matrix();
 
     const auto rotation_index = glGetUniformLocation(program, "u_rotation");
     glUniformMatrix4fv(rotation_index, 1, GL_FALSE, rotation_matrix);

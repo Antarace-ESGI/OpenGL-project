@@ -4,14 +4,17 @@
 #include "main.h"
 #include "Vertex.h"
 #include "libs/stb/stb_image.h"
+#include "Quaternion.h"
 
 class Game {
 public:
     GLShader *shader;
+    Quaternion *rotation;
 
     Game(void) {
         this->vertices = loadModel(this->vertex_count);
         this->shader = new GLShader;
+        this->rotation = new Quaternion;
     };
 
     ~Game(void) {
