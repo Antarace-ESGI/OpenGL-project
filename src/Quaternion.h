@@ -1,6 +1,7 @@
 #ifndef INC_2022_03_30_QUATERNION_H
 #define INC_2022_03_30_QUATERNION_H
 
+#include <cmath>
 
 class Quaternion {
 private:
@@ -60,6 +61,8 @@ public:
     // produit vectoriel, produit matriciel
 
     float *to_rotation_matrix() const;
+
+    static Quaternion to_quaternion(float yaw, float pitch, float roll);
 };
 
 

@@ -9,12 +9,12 @@
 class Game {
 public:
     GLShader *shader;
-    Quaternion *rotation;
+    Quaternion rotation;
 
     Game(void) {
         this->vertices = loadModel(this->vertex_count);
         this->shader = new GLShader;
-        this->rotation = new Quaternion;
+        this->rotation = Quaternion::to_quaternion(0.0f, 0.0f, 0.0f);
     };
 
     ~Game(void) {
