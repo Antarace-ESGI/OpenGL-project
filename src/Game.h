@@ -11,6 +11,7 @@ public:
 
     Game(void) {
         this->vertices = loadModel(this->vertex_count);
+        this->shader = new GLShader;
     };
 
     ~Game(void) {
