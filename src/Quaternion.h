@@ -25,6 +25,7 @@ public:
         return *this;
     }
 
+    // TODO: https://stackoverflow.com/a/39001018
     // Multiplication
     Quaternion operator*=(const Quaternion &other) {
         w *= other.w;

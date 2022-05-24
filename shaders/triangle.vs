@@ -8,6 +8,6 @@ uniform mat4 u_rotation;
 uniform mat4 u_projection;
 
 void main() {
-    gl_Position =  u_projection * u_rotation * vec4(a_position, 1.0);
+    gl_Position = u_projection * u_rotation * vec4(a_position, 1.0);
     v_texcoords = vec2(a_texcoords.x, 1.0 - a_texcoords.y);
 }

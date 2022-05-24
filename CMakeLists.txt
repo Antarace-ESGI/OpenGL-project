@@ -30,5 +30,5 @@ find_package(glfw3 3.3 REQUIRED)
 target_link_libraries(2022_03_30 glfw)
 
 # Copy
-file(COPY shaders DESTINATION .)
-file(COPY resources DESTINATION .)
+#file(COPY shaders DESTINATION .)
+#file(COPY resources DESTINATION .)
