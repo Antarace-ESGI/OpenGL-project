@@ -25,7 +25,6 @@ public:
         return *this;
     }
 
-    // TODO: https://stackoverflow.com/a/39001018
     // Multiplication
     Quaternion operator*=(const Quaternion &other) {
         w *= other.w;
@@ -63,7 +62,11 @@ public:
 
     float *to_rotation_matrix() const;
 
-    static Quaternion to_quaternion(float yaw, float pitch, float roll);
+    static Quaternion from_euler(float yaw, float pitch, float roll);
+
+    void add_euler(float yaw, float pitch, float roll);
+
+    float* to_euler();
 };
 
 

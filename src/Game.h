@@ -14,7 +14,7 @@ public:
     Game(void) {
         this->vertices = loadModel(this->vertex_count);
         this->shader = new GLShader;
-        this->rotation = Quaternion::to_quaternion(0.0f, 0.0f, 0.0f);
+        this->rotation = Quaternion::from_euler(0.0f, 0.0f, 0.0f);
     };
 
     ~Game(void) {
