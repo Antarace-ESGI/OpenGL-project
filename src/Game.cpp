@@ -16,6 +16,10 @@ void Game::render(GLuint textureId) {
     glVertexAttribPointer(texLocation, 2, GL_FLOAT, false, stride, mesh->uv);
     glEnableVertexAttribArray(texLocation);
 
+    int vertexNormal = glGetAttribLocation(program,"a_normal");
+    glVertexAttribPointer(vertexNormal, 3, GL_FLOAT,false, stride, mesh->normal);
+    glEnableVertexAttribArray(vertexNormal);
+
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureId);
 
@@ -23,6 +27,8 @@ void Game::render(GLuint textureId) {
 
     int time_index = glGetUniformLocation(program, "u_time");
     glUniform1f(time_index, time);
+
+    std::cout << this->vertices << std::endl;
 
     // Matrices in OpenGL are defined in columns
     this->rotation = Quaternion::to_quaternion(0.0, time, 0);
