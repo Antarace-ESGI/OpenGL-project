@@ -47,15 +47,19 @@ float *loadModel(size_t &vertex_count) {
                 tinyobj::real_t vy = obj.GetAttrib().vertices[3 * size_t(idx.vertex_index) + 1];
                 tinyobj::real_t vz = obj.GetAttrib().vertices[3 * size_t(idx.vertex_index) + 2];
 
+                tinyobj::real_t nx = obj.GetAttrib().normals[3 * size_t(idx.normal_index) + 0];
+                tinyobj::real_t ny = obj.GetAttrib().normals[3 * size_t(idx.normal_index) + 1];
+                tinyobj::real_t nz = obj.GetAttrib().normals[3 * size_t(idx.normal_index) + 2];
+
                 // 3 positions
                 vertices[i++] = vx;
                 vertices[i++] = vy;
                 vertices[i++] = vz;
 
                 // 3 normals
-                vertices[i++] = 0;
-                vertices[i++] = 0;
-                vertices[i++] = 0;
+                vertices[i++] = nx;
+                vertices[i++] = ny;
+                vertices[i++] = nz;
 
                 if (idx.texcoord_index >= 0) {
                     tinyobj::real_t tx = obj.GetAttrib().texcoords[2 * size_t(idx.vertex_index) + 0];
