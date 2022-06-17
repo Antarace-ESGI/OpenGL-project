@@ -3,26 +3,30 @@ uniform sampler2D u_sampler;
 
 // Const for the illumination system
 
-const float ambientStrength = .0f;
-const vec4 ambientLight = vec4(1.0f,0.f,0.f,ambientStrength);
+const float light_strength = .10f;
+const vec4 light_color = vec4(1.0,1.0,1.0,1.);
 
 // Diffuse component
-const vec3 diffuse_pos = vec3(0.0f,0.0f,0.0f);
+const vec3 diffuse_pos = vec3(0.0f,0.0f,-10.0f);
 varying vec3 vert_normal;
 
 void main() {
+
     vec4 color = texture2D(u_sampler, v_texcoords);
 
-    // Phong material
+    // Ambient light
+
+    vec4 ambient = light_strength * light_color;
 
     // TODO : Add diffuse light
-    vec3 normalize_vert = normalize(vert_normal);
-    float d = dot(normalize_vert,diffuse_pos);
-    float m = max(d,1);
+    vec4 normalize_vert = normalize(vec4(vert_normal,1.));
+    vec4 light_dir = normalize(vec4(diffuse_pos,1.) - v_texcoords);
+    float tmp = dot(normalize_vert,light_dir);
+
+    vec4 diffuse = max(tmp,0.0) * light_color;
 
     // TODO : Add specular light
     // TODO : Add diffuse + ambient + specular to illumination system to create a phong material
-    vec4 result = v_color * ambientLight;
 
-    gl_FragColor = color;
+    gl_FragColor = (ambient + diffuse) * color;
 }
