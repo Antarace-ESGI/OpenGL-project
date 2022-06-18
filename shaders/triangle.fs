@@ -20,7 +20,7 @@ void main() {
 
     // TODO : Add diffuse light
     vec4 normalize_vert = normalize(vec4(vert_normal,1.));
-    vec4 light_dir = normalize(vec4(diffuse_pos,1.) - v_texcoords);
+    vec4 light_dir = normalize(vec4(diffuse_pos,1.) - vec4(v_texcoords,.0,.0));
     float tmp = dot(normalize_vert,light_dir);
 
     vec4 diffuse = max(tmp,0.0) * light_color;
