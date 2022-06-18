@@ -28,5 +28,5 @@ void main() {
     // TODO : Add specular light
     // TODO : Add diffuse + ambient + specular to illumination system to create a phong material
 
-    gl_FragColor = (ambient) * color;
+    gl_FragColor = (ambient + diffuse) * color;
 }
