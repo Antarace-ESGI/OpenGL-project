@@ -3,11 +3,11 @@ uniform sampler2D u_sampler;
 
 // Const for the illumination system
 
-const float light_strength = .10f;
+const float light_strength = .10;
 const vec4 light_color = vec4(1.0,1.0,1.0,1.);
 
 // Diffuse component
-const vec3 diffuse_pos = vec3(0.0f,0.0f,-10.0f);
+const vec3 diffuse_pos = vec3(0.0,0.0,-10.0);
 varying vec3 vert_normal;
 
 void main() {
