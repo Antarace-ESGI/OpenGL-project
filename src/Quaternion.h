@@ -33,7 +33,20 @@ public:
         y *= other.y;
         z *= other.z;
         return *this;
+
     }
+
+
+    Quaternion operator*(const Quaternion &q2) {
+        Quaternion result;
+
+        result.w = this->w*q2.w - this->x*q2.x - this->y*q2.y - this->z*q2.z;
+        result.x = this->x*q2.w + this->w*q2.x + this->y*q2.z - this->z*q2.y;
+        result.y = this->w*q2.y - this->x*q2.z + this->y*q2.w + this->z*q2.x;
+        result.z = this->w*q2.z + this->x*q2.y - this->y*q2.x + this->z*q2.w;
+
+        return result;
+    } 
 
     // Multiplication scalaire
     Quaternion operator*=(const float other) {
