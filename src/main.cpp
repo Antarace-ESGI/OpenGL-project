@@ -36,7 +36,7 @@ int main() {
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
         /* Render here */
-        glClearColor(0.0f, 1.0f, 1.0f, 1);
+        glClearColor(0.0f, 0.8f, 0.8f, 1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         game.render();
