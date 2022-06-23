@@ -3,33 +3,24 @@
 
 #include "main.h"
 #include "Vertex.h"
-#include "libs/stb/stb_image.h"
+#include "Object.h"
 #include "Quaternion.h"
 #include <vector>
-
-
-
 
 class Game {
 public:
    std::vector<Object> objects;
 
-    Game(void) {
+    Game(void) {};
 
-        Object suzanne("resources/suzanne.obj", "resources/suzanne.mtl");
-        objects.push_back(suzanne);
-
-        
+    void initialize(void) {
+        Object skull("resources/Skull.obj", "resources/Skull.mtl", "resources/Skull.jpg");
+        objects.push_back(skull);
     };
 
-    ~Game(void) {
-        
-
-    };
+    ~Game(void) {};
 
     void render(void);
-
-    
 };
 
 #endif //INC_2022_03_30_GAME_H

@@ -1,7 +1,7 @@
 #include "Object.h"
 
 // Render loop
-void Object::render(GLuint textureId) {
+void Object::render(void) {
     auto program = this->shader->getProgram();
     glUseProgram(program);
     auto *mesh = reinterpret_cast<Vertex *>(this->vertices);
