@@ -28,12 +28,10 @@ void Game::render(GLuint textureId) {
     int time_index = glGetUniformLocation(program, "u_time");
     glUniform1f(time_index, time);
 
-    std::cout << this->vertices << std::endl;
-
     // Matrices in OpenGL are defined in columns
     this->rotation = this->rotation * Quaternion::to_quaternion(0.03, 0.03, 0.03);
     
-    float *rotation_matrix = this->rotation.to_rotation_matrix();
+    float *rotation_matrix = this->rotation.to_rotation_matrix(0,-15,-75);
 
     const auto rotation_index = glGetUniformLocation(program, "u_rotation");
     glUniformMatrix4fv(rotation_index, 1, GL_FALSE, rotation_matrix);

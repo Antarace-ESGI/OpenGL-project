@@ -15,6 +15,6 @@
 
 void initialize(GLShader *shader);
 
-float *loadModel(size_t &vertex_count);
+float *loadModel(size_t &vertex_count, std::string objfile, std::string mtlfile);
 
 #endif //INC_2022_03_30_LOADER_H

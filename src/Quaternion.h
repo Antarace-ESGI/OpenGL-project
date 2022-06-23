@@ -74,7 +74,7 @@ public:
 
     // produit vectoriel, produit matriciel
 
-    float *to_rotation_matrix() const;
+    float *to_rotation_matrix(int tx, int ty, int tz) const;
 
     static Quaternion to_quaternion(float yaw, float pitch, float roll);
 };

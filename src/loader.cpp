@@ -6,10 +6,9 @@ void initialize(GLShader *shader) {
     shader->create();
 }
 
-float *loadModel(size_t &vertex_count) {
-    std::string objfile = "resources/Skull.obj";
+float *loadModel(size_t &vertex_count, std::string objfile, std::string mtlfile) {
     tinyobj::ObjReaderConfig config;
-    config.mtl_search_path = "resources/Skull.mtl";
+    config.mtl_search_path = mtlfile;
     config.triangulate = true;
     tinyobj::ObjReader obj;
 
