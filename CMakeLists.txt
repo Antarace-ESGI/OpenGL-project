@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 add_executable(2022_03_30
         src/main.cpp src/main.h
         src/common/GLShader.cpp src/common/GLShader.h
+        src/Object.cpp src/Object.h
         src/Game.cpp src/Game.h
         src/DragonData.h
         src/libs/tiny_obj_loader.cc src/libs/tiny_obj_loader.h

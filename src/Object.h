@@ -1,7 +1,22 @@
 #ifndef INC_2022_03_30_OBJECT_H
 #define INC_2022_03_30_OBJECT_H
 
-#include "main.h"
+#include <cmath>
+#include <iostream>
+#include <iostream>
+#include <fstream>
+#include <vector>
+
+#include "GL/glew.h"
+#include "GL/gl.h"
+#include "GL/glu.h"
+#include "GLFW/glfw3.h"
+
+#define WIDTH 1920.0f
+#define HEIGHT 1080.0f
+#include "common/GLShader.h"
+
+#include "loader.h"
 #include "Vertex.h"
 #include "libs/stb/stb_image.h"
 #include "Quaternion.h"
@@ -11,13 +26,23 @@ public:
     GLShader *shader;
     Quaternion rotation;
     GLuint textureId;
+    size_t vertex_count = 0;
+    float *vertices;
+
+    float tx = 0;
+    float ty = 0;
+    float tz = 0;
+
+    float rx = 0;
+    float ry = 0;
+    float rz = 0;
 
     Object(std::string obj_file, std::string mtl_file, char const * texture_file) {
         this->vertices = loadModel(this->vertex_count, obj_file, mtl_file);
         this->shader = new GLShader;
         this->rotation = Quaternion::to_quaternion(0.0f, 0.0f, 0.0f);
 
-        initialize(shader);
+        initialize(this->shader);
 
         glGenTextures(1, &textureId);
         glActiveTexture(GL_TEXTURE0);
@@ -41,15 +66,12 @@ public:
     };
 
     ~Object(void) {
-        delete this->vertices; // Free vertices
+        //delete this->vertices; // Free vertices
         shader->destroy();
         glDeleteTextures(1, &textureId);
     };
 
     void render();
-
-    size_t vertex_count = 0;
-    float *vertices;
 
     const float ASPECT_RATIO = WIDTH / HEIGHT;
     const float Z_NEAR = 0.1f;

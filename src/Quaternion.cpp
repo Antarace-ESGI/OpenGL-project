@@ -1,6 +1,6 @@
 #include "Quaternion.h"
 
-float *Quaternion::to_rotation_matrix(float tx, float ty, float tz) const {
+float *Quaternion::to_rotation_matrix(float tx = 0, float ty = -15, float tz = -75) const {
     // Source: http://www.songho.ca/opengl/gl_quaternion.html
     float *mat = new float[16]{
             1 - 2 * (y * y) - 2 * (z * z),  2 * x * y - 2 * w * z,           2 * x * z + 2 * w * y,         0, // 1st column

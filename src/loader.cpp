@@ -6,7 +6,7 @@ void initialize(GLShader *shader) {
     shader->create();
 }
 
-float *loadModel(size_t &vertex_count, std::string objfile, std::string mtlfile) {
+float *loadModel(size_t &vertex_count, std::string& objfile, std::string& mtlfile) {
     tinyobj::ObjReaderConfig config;
     config.mtl_search_path = mtlfile;
     config.triangulate = true;
